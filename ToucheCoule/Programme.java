@@ -3,24 +3,42 @@ package ToucheCoule;
 import java.util.Arrays;
 
 public class Programme {
+    //Definition des grilles
+    static final int GRILLE_ATTAQUES = 0;
+    static final int GRILLE_BATEAUX = 1;
+    //définition des caractères de remplissage
+    static final char VAGUE = '~' ;
+    static final char BATEAU = 'O';
+    static final char TOUCHE = 'X';
+    static final char RATE = '*';
+
     public static void main(String[] args) {
-        System.out.println("Hello world !");
+        //System.out.println("Hello world !");
 
         //Declaration of J1_points
         var J1_Points = 0;
         var J2_Points = J1_Points; //Not the same pointer.
 
-        //Declaration of a Constant
-        //final var MAX_POINTS = 5 + 4 + 3 + 2 + 2;
-        //Creation of a table for the battle grid
-        var attackGridPlayer1= new char[100]; //Creation and initialisation of a table
-        var attackGridPlayer2= new char[100]; //Creation and initialisation of a table
-        //int[] integerTab = {1,2,3,4,5,6,7};
-        //creation of a characters table
-        var boatsGridPlayer1 = new char[100];
-        var boatsGridPlayer2 = new char[100];
-        //show an element of the table
-        //System.out.println("args = " + attackGrid[0]);
+
+
+
+
+//        //Declaration of a Constant
+//        //final var MAX_POINTS = 5 + 4 + 3 + 2 + 2;
+//        //Creation of a table for the battle grid
+//        var attackGridPlayer1= new char[100]; //Creation and initialisation of a table
+//        var attackGridPlayer2= new char[100]; //Creation and initialisation of a table
+//        //int[] integerTab = {1,2,3,4,5,6,7};
+//        //creation of a characters table
+//        var boatsGridPlayer1 = new char[100];
+//        var boatsGridPlayer2 = new char[100];
+//        //show an element of the table
+//        //System.out.println("args = " + attackGrid[0]);
+
+        //creation des tableaux  attaques et bateaux par joueur
+        var grillesJoueur1 = new char[2][100];
+        var grillesJoueur2 = new char[2][100];
+
 
 
         //constant of boats and their size
@@ -36,21 +54,23 @@ public class Programme {
         final var MAX_POINTS = computeSum(BOATS);
 
 
-        for (int i = 0, y = 0; i < attackGridPlayer1.length ; i++, y++){
-            //U can do this way
-            attackGridPlayer1[i] = '.';
-            attackGridPlayer2[i] = '.';
-        }
-        //Or This way, to fill the grid.
-        Arrays.fill(boatsGridPlayer1, '.');
-        Arrays.fill(boatsGridPlayer2, '.');
+//        for (int i = 0, y = 0; i < attackGridPlayer1.length ; i++, y++){
+//            //U can do this way
+//            attackGridPlayer1[i] = '.';
+//            attackGridPlayer2[i] = '.';
+//        }
+//        //Or This way, to fill the grid.
+//        Arrays.fill(boatsGridPlayer1, '.');
+//        Arrays.fill(boatsGridPlayer2, '.');
+        fillGrid(grillesJoueur1, VAGUE);
+        fillGrid(grillesJoueur2, VAGUE);
 
-        //Display of the attackGrid by columns
-        System.out.println("Attack grid");
-        System.out.println("Player 1:");
-        displayGrid(attackGridPlayer1);
-        System.out.println("Player 2:");
-        displayGrid(attackGridPlayer2);
+//        //Display of the attackGrid by columns
+//        System.out.println("Attack grid");
+//        System.out.println("Player 1:");
+//        displayGrid(attackGridPlayer1);
+//        System.out.println("Player 2:");
+//        displayGrid(attackGridPlayer2);
 
 
         /*
@@ -71,18 +91,30 @@ public class Programme {
 //        //battleships placement
         System.out.println("\nPlacement des bateaux... ");
         for (var bateau: BOATS) {
-            setBoats(boatsGridPlayer1, bateau);
-            setBoats(boatsGridPlayer2, bateau);
+            setBoats(grillesJoueur1[GRILLE_BATEAUX], bateau);
+            setBoats(grillesJoueur2[GRILLE_BATEAUX], bateau);
         }
         System.out.println("\n Grille des bateaux");
-        System.out.println("Player 1:");
-        displayGrid(boatsGridPlayer1);
-        System.out.println("Player 2:");
-        displayGrid(boatsGridPlayer2);
+        displayGrids(grillesJoueur1, grillesJoueur2);
+//        System.out.println("Player 1:");
+//        displayGrid(boatsGridPlayer1);
+//        System.out.println("Player 2:");
+//        displayGrid(boatsGridPlayer2);
 
 
     }
 
+    /**
+     * Remplissage des grilles attaques et bateaux des joueurs
+     * @param grillesJoueur les grilles d'un joueur
+     * @param remplissage caractère de remplissage
+     */
+    static void fillGrid(char[][] grillesJoueur, char remplissage) {
+        for (var grille: grillesJoueur) {
+            //affichage de la taille de la grille -> grilleJoueur1[2][100] => grille[100]
+            Arrays.fill(grille, remplissage);
+        }
+    }
     /**
      * This function allow to place the boats on the grid.
      * Boats are not allowed to cross themselves
@@ -97,7 +129,7 @@ public class Programme {
     //        do {
     //            cell = (int)(Math.random()*tableau.length);
     //        } while(tableau[cell] != '.');
-            while (tableau[cell= (int)(Math.random() * tableau.length)] != '.');
+            while (tableau[cell= (int)(Math.random() * tableau.length)] != VAGUE);
             //var direction = (int)(Math.random() * 4);
             var direction = DIRECTION.values()[(int)(Math.random() * 4)];
             System.out.printf("Cell : %2d | Taille : %1d | Direction : %s%n", cell, tailleBateau, direction);
@@ -139,7 +171,7 @@ public class Programme {
     static boolean isBoatSet(char[] tableau, int tailleBateau, int start, int end, int step) {
         //check if all the cases are available
         for (var cell = start; cell <= end; cell += step){
-            if (tableau[cell] != '.') {
+            if (tableau[cell] != VAGUE) {
                 return false;
             }
         }
@@ -183,6 +215,33 @@ public class Programme {
             if(i%10 ==9){
                 System.out.println();
             }
+        }
+    }
+
+    /**
+     * Affichage des grilles des deux joueurs
+     * @param grillesJoueur1 grilles du premier joueur
+     * @param grillesJoueur2 grilles du second joueur
+     */
+    static void displayGrids(char [][] grillesJoueur1, char [][] grillesJoueur2){
+        System.out.println("\t\tGrille d'attaques des 2 joueurs ");
+        System.out.println("\t\tJoueur1:\t\t");
+        for (var i = 0; i <2; i++){
+            System.out.print("\t");
+            for (char lettre = 'A'; lettre < 'A' + 10; System.out.print(lettre + " "), lettre++);
+        }
+        System.out.println();
+        var taille = grillesJoueur1[GRILLE_ATTAQUES].length;
+        for (var i = 0; i < taille; i++){
+            if(i % 10 == 0) System.out.printf("%2d", i/10 +1);
+            System.out.print(grillesJoueur1[GRILLE_ATTAQUES][i]+" ");
+            if(i % 10 == 9){
+                for (var j = 0; j < 10; j++) {
+                    if(j % 10 == 0) System.out.printf("%2d", j/10 +1);
+                    System.out.print(grillesJoueur2[GRILLE_ATTAQUES][i-9+j]+" ");
+                }
+            }
+            System.out.println();
         }
     }
 }
