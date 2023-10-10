@@ -1,0 +1,4 @@
+commande terminal : 
+javac -> Compiler 
+
+var doit toujours être suivi d'un = pour donner une valeur à la variable si on ne précise pas son type 
