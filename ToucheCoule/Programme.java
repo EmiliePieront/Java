@@ -9,18 +9,19 @@ public class Programme {
         //Declaration of J1_points
         var J1_Points = 0;
         var J2_Points = J1_Points; //Not the same pointer.
-        J1_Points += 2;
-        System.out.println(J1_Points+" "+J2_Points);
+
         //Declaration of a Constant
         //final var MAX_POINTS = 5 + 4 + 3 + 2 + 2;
         //Creation of a table for the battle grid
-        var attackGrid = new char[100]; //Creation and initialisation of a table
-        int[] integerTab = {1,2,3,4,5,6,7};
+        var attackGridPlayer1= new char[100]; //Creation and initialisation of a table
+        var attackGridPlayer2= new char[100]; //Creation and initialisation of a table
+        //int[] integerTab = {1,2,3,4,5,6,7};
         //creation of a characters table
-        var boatsGrid = new char[100];
+        var boatsGridPlayer1 = new char[100];
+        var boatsGridPlayer2 = new char[100];
         //show an element of the table
-        System.out.println("args = " + attackGrid[0]);
-        //filling attack grid with "."
+        //System.out.println("args = " + attackGrid[0]);
+
 
         //constant of boats and their size
         final int CARRIER;
@@ -35,17 +36,21 @@ public class Programme {
         final var MAX_POINTS = computeSum(BOATS);
 
 
-        for (int i = 0, y = 0; i < attackGrid.length ; i++, y++){
+        for (int i = 0, y = 0; i < attackGridPlayer1.length ; i++, y++){
             //U can do this way
-            attackGrid[i] = '.';
+            attackGridPlayer1[i] = '.';
+            attackGridPlayer2[i] = '.';
         }
         //Or This way, to fill the grid.
-        Arrays.fill(boatsGrid, '.');
-
+        Arrays.fill(boatsGridPlayer1, '.');
+        Arrays.fill(boatsGridPlayer2, '.');
 
         //Display of the attackGrid by columns
         System.out.println("Attack grid");
-        displayGrid(attackGrid);
+        System.out.println("Player 1:");
+        displayGrid(attackGridPlayer1);
+        System.out.println("Player 2:");
+        displayGrid(attackGridPlayer2);
 
 
         /*
@@ -59,17 +64,23 @@ public class Programme {
         System.out.println("args = " + attackGrid[0]);
         System.out.println(Arrays.toString(boatsGrid));
         */
-        System.out.println("Boats grid");
-        displayGrid(boatsGrid);
 
-        //battleships placement
+//        System.out.println("Boats grid");
+//        displayGrid(boatsGrid);
+
+//        //battleships placement
         System.out.println("\nPlacement des bateaux... ");
-        for (var bateau: BOATS
-             ) {
-            setBoats(boatsGrid, bateau);
+        for (var bateau: BOATS) {
+            setBoats(boatsGridPlayer1, bateau);
+            setBoats(boatsGridPlayer2, bateau);
         }
         System.out.println("\n Grille des bateaux");
-        displayGrid(boatsGrid);
+        System.out.println("Player 1:");
+        displayGrid(boatsGridPlayer1);
+        System.out.println("Player 2:");
+        displayGrid(boatsGridPlayer2);
+
+
     }
 
     /**
@@ -99,12 +110,12 @@ public class Programme {
                     break;
                 case LEFT:
                     if (cell > 9 && (cell - tailleBateau + 1 ) % 10 < cell % 10 ){
-                        isBoatSet = isBoatSet(tableau, tailleBateau, cell - (tailleBateau +1), cell, 1);
+                        isBoatSet = isBoatSet(tableau, tailleBateau, cell - tailleBateau +1, cell, 1);
                     }
                     break;
                 case RIGHT:
                     if (cell < 90 && (cell + tailleBateau - 1 ) % 10 > cell % 10 ){
-                        isBoatSet = isBoatSet(tableau, tailleBateau, cell + (tailleBateau -1), cell, 1);
+                        isBoatSet = isBoatSet(tableau, tailleBateau, cell, cell + tailleBateau -1, 1);
                     }
                     break;
                 case BOTTOM:
