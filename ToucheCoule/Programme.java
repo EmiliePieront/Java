@@ -224,24 +224,23 @@ public class Programme {
      * @param grillesJoueur2 grilles du second joueur
      */
     static void displayGrids(char [][] grillesJoueur1, char [][] grillesJoueur2){
-        System.out.println("\t\tGrille d'attaques des 2 joueurs ");
-        System.out.println("\t\tJoueur1:\t\t");
-        for (var i = 0; i <2; i++){
+        System.out.println("\t\t  Joueur1\t\t\t\t  Joueur2");
+        for (var i = 0; i < 2; i++) {
             System.out.print("\t");
-            for (char lettre = 'A'; lettre < 'A' + 10; System.out.print(lettre + " "), lettre++);
+            for (char lettre = 'A'; lettre < 'A' + 10; System.out.print(lettre++ + " "));
         }
         System.out.println();
-        var taille = grillesJoueur1[GRILLE_ATTAQUES].length;
-        for (var i = 0; i < taille; i++){
-            if(i % 10 == 0) System.out.printf("%2d", i/10 +1);
-            System.out.print(grillesJoueur1[GRILLE_ATTAQUES][i]+" ");
-            if(i % 10 == 9){
+        for (int i = 0, taille = grillesJoueur1.length; i < taille; i++) {
+            if (i % 10 == 0) System.out.printf(" %2d ", i / 10 + 1);
+            System.out.print(grillesJoueur1[i] + " ");
+            if (i % 10 == 9) {
                 for (var j = 0; j < 10; j++) {
-                    if(j % 10 == 0) System.out.printf("%2d", j/10 +1);
-                    System.out.print(grillesJoueur2[GRILLE_ATTAQUES][i-9+j]+" ");
+                    if (j == 0) System.out.printf(" %2d ", i / 10 + j + 1);
+                    System.out.print(grillesJoueur2[i - 9 + j] + " ");
                 }
+                System.out.println();
             }
-            System.out.println();
         }
+        System.out.println();
     }
 }
