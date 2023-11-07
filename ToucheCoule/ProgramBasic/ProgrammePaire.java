@@ -1,4 +1,4 @@
-package ToucheCoule;
+package ToucheCoule.ProgramBasic;
 //Fct touche et touche2 faites en paire avec Jonathan
 
 import java.util.Arrays;
