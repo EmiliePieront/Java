@@ -22,4 +22,9 @@ public class Pseudo {
         nommbrePseudo++;
         return true;
     }
+    public static String addPseudo(){
+        var retour = "Joueur-" + (nommbrePseudo+1);
+        addPseudo(retour);
+        return retour;
+    }
 }
