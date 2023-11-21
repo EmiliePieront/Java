@@ -1,5 +1,7 @@
 package ToucheCoule.Advanced;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Joueur {
     private final String nom;
     private final String prenom;
@@ -7,18 +9,33 @@ public class Joueur {
     private Statistique statistique;
     private final Boolean estUnBot;
     private Grille grillesAttaque, grilleDefense;
-    Joueur(String nom, String prenom) {
+
+    /**
+     * Création d'un joueur humain à partir de son nom et de son prénom
+     * @param nom Nom du joueur (non null)
+     * @param prenom Prénom du joueur (non null)
+     *
+     */
+    Joueur(@NotNull String nom, @NotNull String prenom) {
         this(nom, prenom, false);
 
     }
-    Joueur(String nom, String prenom, boolean estUnBot){
+
+    /**
+     * Création d'un joueur (bot ou humain)
+     * @param nom Nom du joueur (non null)
+     * @param prenom Prénom du joueur (non null)
+     * @param estUnBot True si c'est un bot
+     */
+    Joueur(@NotNull String nom,@NotNull String prenom, boolean estUnBot){
         this.estUnBot = estUnBot;
         this.nom = nom;
         this.prenom = prenom;
     }
-    Joueur(String pseudo){
-        estUnBot = true;
-        nom = prenom = null;
+
+
+    Joueur(@NotNull String pseudo){
+        this(pseudo, pseudo, true);
         this.pseudo = pseudo;
     }
     void setPseudo(String pseudo){

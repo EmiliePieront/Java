@@ -5,7 +5,11 @@ public class Partie {
     private Joueur joueurActif;
     private final NIVEAU_PARTIE niveauPartie;
     private final int idPartie;
-    Partie() {
+
+    private Partie(){
+
+    }
+    Partie(int idPartie) {
 
     }
 

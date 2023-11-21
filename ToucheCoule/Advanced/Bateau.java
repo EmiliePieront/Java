@@ -6,10 +6,14 @@ public class Bateau {
     private ETAT_BATEAU etatBateau = ETAT_BATEAU.INTACTE;
     private int nombreDeVie;
 
+    /***
+     *
+     * @param taille taille du bateau
+     * @param nom nom du bateau
+     */
     public Bateau(int taille, String nom) {
-        this.taille = taille;
+        this.taille = nombreDeVie = taille;
         this.nom = nom;
-        nombreDeVie = taille;
 
     }
 }
