@@ -1,4 +1,5 @@
 package ToucheCoule.Advanced;
+
 /**
  * La classe Partie représente une partie (en cours ou jouée)
  */
