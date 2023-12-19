@@ -64,7 +64,6 @@ public class TV_1950 {
         if(chaineChourante == 0)
             chaineChourante = nombreDeChaine;
     }
-
     @Override
     public String toString() {
         return "TV_1950{" +
@@ -81,5 +80,8 @@ public class TV_1950 {
                 ", elle fonctionne=" + (estBranchee & estAllumee ? "OUI" : "NON") +
                 '}';
 
+    }
+    private void maMethodePrivate() {
+        System.out.println("Je suis private dans TV1950");
     }
 }

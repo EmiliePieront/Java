@@ -16,7 +16,12 @@ public class TV_1950_Mute extends TV_1950 {
             volume = 0;
         }
         isMuted = !isMuted;
-
+    }
+    public String toString(){
+        return super.toString() +
+                "Muted:" + isMuted;
+    }
+    public void maMethodePrivate() {
 
     }
 }
